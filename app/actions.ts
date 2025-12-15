@@ -21,7 +21,7 @@ export async function sendEmail(formData: FormData) {
       to: 'intakes@unveiledecho.com',
       
       // This allows you to hit "Reply" in your inbox and email the client directly
-      reply_to: email, 
+      //reply_to: email, 
       
       subject: `New Contact Form Submission from ${name}`,
       html: `
