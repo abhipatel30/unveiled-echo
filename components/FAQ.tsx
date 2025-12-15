@@ -1,11 +1,4 @@
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion" // *Requires installing shadcn/ui or use simple logic below
-
-// Simple Tailwind Version (No external lib dependency for simplicity)
+// Simple Tailwind Version (No external dependencies)
 export default function FAQ() {
   const faqs = [
     { q: "How does online therapy work?", a: "Online therapy works just like traditional therapy but is conducted via secure video calls or messaging." },
