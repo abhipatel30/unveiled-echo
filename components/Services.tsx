@@ -3,22 +3,22 @@ import { Video, MessageSquare, Lock, Sparkles } from 'lucide-react';
 const services = [
   {
     title: "Video Sessions",
-    desc: "Face-to-face therapy through secure video calls. Connect in real-time.",
+    desc: "Face-to-face therapy through secure video calls. Connect with your therapist in real-time from anywhere.",
     icon: <Video className="h-8 w-8 text-white" />
   },
   {
     title: "Messaging Support",
-    desc: "Send messages between sessions. Get support when you need it most.",
+    desc: "Send messages to your therapist between sessions. Get support when you need it most.",
     icon: <MessageSquare className="h-8 w-8 text-white" />
   },
   {
     title: "Specialized Therapy",
-    desc: "Tailored evidence-based approaches for your unique journey.",
+    desc: "Every person's journey is unique, and so is the care they deserve. We offer specialized therapy tailored to your specific needs, drawing on evidence-based approaches.",
     icon: <Sparkles className="h-8 w-8 text-white" />
   },
   {
     title: "Complete Privacy",
-    desc: "End-to-end encryption. Your privacy and emotional safety are our priority.",
+    desc: "DPDP compliant platform with end-to-end encryption. Your privacy and safety are our priority.",
     icon: <Lock className="h-8 w-8 text-white" />
   }
 ];

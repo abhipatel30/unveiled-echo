@@ -4,22 +4,22 @@ const features = [
   {
     icon: <Heart className="h-6 w-6 text-teal-600" />,
     title: "Compassionate Care",
-    desc: "Healing begins in a space where you feel seen, heard, and accepted exactly as you are."
+    desc: "With a deep respect for your stories, your struggles, and your strength, we believe that healing begins in a space where you feel seen, heard, and accepted exactly as you are."
   },
   {
     icon: <Globe className="h-6 w-6 text-teal-600" />,
     title: "Accessible Support",
-    desc: "Connect with compassionate care from the comfort and privacy of your own space."
+    desc: "Support should be easy to reach, no matter where you are. Through secure online sessions, you can connect with compassionate care from the comfort and privacy of your own space."
   },
   {
     icon: <UserCheck className="h-6 w-6 text-teal-600" />,
     title: "Professional Excellence",
-    desc: "High-quality, evidence-based care grounded in empathy and integrity."
+    desc: "We are committed to providing high-quality, evidence-based care grounded in empathy, integrity, and professionalism. Our goal is to ensure every session is guided by practices that are tailored to your unique needs."
   },
   {
     icon: <ShieldCheck className="h-6 w-6 text-teal-600" />,
     title: "RCI + DPDP Compliant",
-    desc: "We adhere to RCI standards and fully comply with the DPDP Act for your privacy."
+    desc: "Guided by the principles of ethical care and professional accountability, we adhere to RCI standards and fully comply with the DPDP Act. Your privacy, trust, and emotional safety are at the core of every session, ensuring a secure and respectful therapeutic experience."
   }
 ];
 

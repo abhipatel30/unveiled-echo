@@ -34,7 +34,7 @@ export default function Footer() {
         
         <div className="border-t border-slate-800 pt-8 text-center text-xs text-slate-500">
           <p>© 2025 Unveiled Echo. All rights reserved.</p>
-          <p className="mt-2 text-red-400">If you're experiencing a crisis, please call 112.</p>
+          <p className="mt-2 text-red-400">If you're experiencing a mental health crisis, please call the National Suicide Prevention Lifeline at 112</p>
         </div>
       </div>
     </footer>
