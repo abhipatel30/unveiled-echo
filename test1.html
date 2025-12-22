@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unveiled Echo | Professional Online Therapy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'echo-teal': '#2A6F76',
+                        'echo-light': '#E8F1F2',
+                        'echo-dark': '#1B3B42',
+                        'echo-sand': '#F4F0EB',
+                        'echo-slate': '#4A5568',
+                        'echo-sage': '#9CAF88'
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Montserrat"', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 8s ease-in-out infinite',
+                        'float-delayed': 'float 8s ease-in-out 4s infinite',
+                        'fade-in-up': 'fadeInUp 1s ease-out forwards',
+                        'breathe': 'breathe 6s ease-in-out infinite',
+                        'wave': 'wave 25s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        breathe: {
+                            '0%, 100%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.05)' },
+                        },
+                        wave: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(-50%)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F4F0EB;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2A6F76;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #1B3B42;
+        }
+
+        /* Parallax Utilities */
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        /* Reveal on Scroll */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease-out;
+        }
+        .reveal-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Accordion transition */
+        .accordion-content {
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        .accordion-content.active {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="font-sans text-echo-slate bg-echo-sand overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6 px-6 lg:px-12 bg-transparent">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#" class="text-3xl font-serif font-semibold text-echo-dark tracking-wide z-50 relative flex items-center gap-2">
+                <i class="fas fa-leaf text-echo-teal"></i> Unveiled Echo
+            </a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#hero-content" class="text-echo-dark hover:text-echo-teal transition-colors text-sm font-medium tracking-wider uppercase">Home</a>
+                <a href="#mission" class="text-echo-dark hover:text-echo-teal transition-colors text-sm font-medium tracking-wider uppercase">Mission</a>
+                <a href="#services" class="text-echo-dark hover:text-echo-teal transition-colors text-sm font-medium tracking-wider uppercase">Services</a>
+                <a href="#faq" class="text-echo-dark hover:text-echo-teal transition-colors text-sm font-medium tracking-wider uppercase">FAQ</a>
+                <a href="#contact" class="px-6 py-2 bg-echo-teal text-white rounded-full hover:bg-echo-dark transition-all shadow-lg transform hover:-translate-y-0.5 text-sm font-medium tracking-wide">
+                    Contact
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-echo-dark text-2xl z-50 focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="fixed inset-0 bg-echo-sand z-40 flex flex-col items-center justify-center space-y-8 opacity-0 pointer-events-none transition-opacity duration-300">
+            <a href="#hero-content" class="text-2xl font-serif text-echo-dark" onclick="toggleMenu()">Home</a>
+            <a href="#mission" class="text-2xl font-serif text-echo-dark" onclick="toggleMenu()">Mission</a>
+            <a href="#services" class="text-2xl font-serif text-echo-dark" onclick="toggleMenu()">Services</a>
+            <a href="#faq" class="text-2xl font-serif text-echo-dark" onclick="toggleMenu()">FAQ</a>
+            <a href="#contact" class="text-2xl font-serif text-echo-teal" onclick="toggleMenu()">Contact Us</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative h-screen flex items-center justify-center overflow-hidden">
+        <!-- Parallax Background Image -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                 alt="Calm Nature" 
+                 class="w-full h-full object-cover opacity-90"
+                 style="transform: scale(1.1);"
+                 id="hero-bg">
+            <div class="absolute inset-0 bg-gradient-to-b from-echo-sand/30 via-transparent to-echo-sand"></div>
+        </div>
+
+        <!-- SVG Abstract Animations -->
+        <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-200 rounded-full mix-blend-multiply filter blur-2xl opacity-40 animate-float"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-72 h-72 bg-teal-200 rounded-full mix-blend-multiply filter blur-2xl opacity-40 animate-float-delayed"></div>
+        
+        <!-- Animated Wave at Bottom -->
+        <div class="absolute bottom-0 left-0 w-[200%] h-24 overflow-hidden z-20 opacity-50">
+             <svg class="absolute bottom-0 w-full h-full animate-wave text-echo-sand" viewBox="0 0 1440 320" preserveAspectRatio="none">
+                <path fill="currentColor" fill-opacity="1" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,250.7C960,235,1056,181,1152,165.3C1248,149,1344,171,1392,181.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+             </svg>
+        </div>
+
+        <!-- Hero Content -->
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto mt-10" id="hero-content">
+            <h1 class="text-5xl md:text-7xl font-serif text-echo-dark mb-8 leading-tight animate-fade-in-up" style="animation-delay: 0.2s;">
+                Unveiled Echo of <br><span class="italic text-echo-teal">Inner Self</span>
+            </h1>
+            <p class="text-lg md:text-xl text-echo-slate mb-10 max-w-2xl mx-auto font-light leading-relaxed animate-fade-in-up" style="animation-delay: 0.4s;">
+                Professional online therapy and counseling services tailored to your needs. Connect with licensed therapists from the comfort of your home.
+            </p>
+            <div class="animate-fade-in-up space-x-4" style="animation-delay: 0.6s;">
+                <a href="#contact" class="inline-block px-10 py-4 bg-echo-teal text-white hover:bg-echo-dark transition-all duration-300 rounded-full shadow-lg text-sm tracking-widest uppercase transform hover:-translate-y-1">
+                    Start Your Journey
+                </a>
+                <a href="#mission" class="inline-block px-10 py-4 border border-echo-dark text-echo-dark hover:bg-echo-dark hover:text-white transition-all duration-300 rounded-full text-sm tracking-widest uppercase">
+                    Learn More
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mission Section -->
+    <section id="mission" class="py-24 relative overflow-hidden bg-white">
+        <!-- Floating SVG Background -->
+        <svg class="absolute top-10 left-0 w-96 h-96 text-echo-teal opacity-5 transform -translate-x-1/2" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <path fill="currentColor" d="M44.7,-76.4C58.9,-69.2,71.8,-59.1,81.6,-46.6C91.4,-34.1,98.1,-19.2,95.8,-5.3C93.5,8.6,82.2,21.5,70.6,31.2C59,40.9,47.1,47.4,35.7,53.2C24.3,59,13.4,64.1,-0.6,65.1C-14.6,66.1,-32,63,-45.1,55.3C-58.2,47.6,-67,35.3,-72.6,21.8C-78.2,8.3,-80.6,-6.4,-76.1,-19.4C-71.6,-32.4,-60.2,-43.7,-47.9,-51.5C-35.6,-59.3,-22.4,-63.6,-8.6,-62.1C5.2,-60.6,10.4,-53.3,44.7,-76.4Z" transform="translate(100 100)" />
+        </svg>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 reveal-on-scroll">
+                <h2 class="text-4xl font-serif text-echo-dark mb-6">Our Mission</h2>
+                <div class="w-16 h-1 bg-echo-teal mx-auto mb-8"></div>
+                <p class="text-xl leading-relaxed text-echo-slate max-w-3xl mx-auto">
+                    We believe everyone deserves access to quality mental health care. Our mission is to make professional therapy accessible, affordable, and stigma-free.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10">
+                <!-- Compassionate Care -->
+                <div class="bg-echo-sand/30 p-8 rounded-xl border border-echo-slate/10 reveal-on-scroll hover:shadow-lg transition-all duration-300">
+                    <div class="flex items-center gap-4 mb-4">
+                        <i class="fas fa-heart text-echo-teal text-2xl"></i>
+                        <h3 class="text-2xl font-serif text-echo-dark">Compassionate Care</h3>
+                    </div>
+                    <p class="text-echo-slate leading-relaxed">
+                        With a deep respect for your stories, your struggles, and your strength, we believe that healing begins in a space where you feel seen, heard, and accepted exactly as you are.
+                    </p>
+                </div>
+
+                <!-- Accessible Support -->
+                <div class="bg-echo-sand/30 p-8 rounded-xl border border-echo-slate/10 reveal-on-scroll hover:shadow-lg transition-all duration-300" style="transition-delay: 0.1s;">
+                    <div class="flex items-center gap-4 mb-4">
+                        <i class="fas fa-universal-access text-echo-teal text-2xl"></i>
+                        <h3 class="text-2xl font-serif text-echo-dark">Accessible Support</h3>
+                    </div>
+                    <p class="text-echo-slate leading-relaxed">
+                        Support should be easy to reach, no matter where you are. Through secure online sessions, you can connect with compassionate care from the comfort and privacy of your own space.
+                    </p>
+                </div>
+
+                <!-- Professional Excellence -->
+                <div class="bg-echo-sand/30 p-8 rounded-xl border border-echo-slate/10 reveal-on-scroll hover:shadow-lg transition-all duration-300" style="transition-delay: 0.2s;">
+                    <div class="flex items-center gap-4 mb-4">
+                        <i class="fas fa-star text-echo-teal text-2xl"></i>
+                        <h3 class="text-2xl font-serif text-echo-dark">Professional Excellence</h3>
+                    </div>
+                    <p class="text-echo-slate leading-relaxed">
+                        We are committed to providing high-quality, evidence-based care grounded in empathy, integrity, and professionalism. Our goal is to ensure every session is guided by practices that are tailored to your unique needs.
+                    </p>
+                </div>
+
+                <!-- RCI + DPDP Compliant -->
+                <div class="bg-echo-sand/30 p-8 rounded-xl border border-echo-slate/10 reveal-on-scroll hover:shadow-lg transition-all duration-300" style="transition-delay: 0.3s;">
+                    <div class="flex items-center gap-4 mb-4">
+                        <i class="fas fa-shield-alt text-echo-teal text-2xl"></i>
+                        <h3 class="text-2xl font-serif text-echo-dark">RCI + DPDP Compliant</h3>
+                    </div>
+                    <p class="text-echo-slate leading-relaxed">
+                        Guided by the principles of ethical care and professional accountability, we adhere to RCI standards and fully comply with the DPDP Act. Your privacy, trust, and emotional safety are at the core of every session, ensuring a secure and respectful therapeutic experience.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services / How We Help Section -->
+    <section id="services" class="py-24 bg-echo-sand relative">
+         <!-- Geometric Decoration -->
+         <div class="absolute top-0 right-0 w-64 h-full bg-white/50 skew-x-12 opacity-50 pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 reveal-on-scroll">
+                <span class="text-echo-teal font-medium tracking-widest text-sm uppercase">Our Services</span>
+                <h2 class="text-4xl font-serif text-echo-dark mt-2 mb-4">How We Help</h2>
+                <div class="w-24 h-px bg-echo-slate/20 mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Service 1 -->
+                <div class="bg-white p-8 hover:shadow-xl transition-all duration-500 reveal-on-scroll group rounded-lg border-b-4 border-transparent hover:border-echo-teal text-center">
+                    <div class="w-16 h-16 mx-auto bg-echo-sand rounded-full flex items-center justify-center text-echo-teal mb-6 text-2xl group-hover:bg-echo-teal group-hover:text-white transition-colors duration-300">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3 class="text-xl font-serif text-echo-dark mb-4">Video Sessions</h3>
+                    <p class="text-echo-slate text-sm leading-6">
+                        Face-to-face therapy through secure video calls. Connect with your therapist in real-time from anywhere.
+                    </p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="bg-white p-8 hover:shadow-xl transition-all duration-500 reveal-on-scroll group rounded-lg border-b-4 border-transparent hover:border-echo-teal text-center" style="transition-delay: 0.1s;">
+                    <div class="w-16 h-16 mx-auto bg-echo-sand rounded-full flex items-center justify-center text-echo-teal mb-6 text-2xl group-hover:bg-echo-teal group-hover:text-white transition-colors duration-300">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3 class="text-xl font-serif text-echo-dark mb-4">Messaging Support</h3>
+                    <p class="text-echo-slate text-sm leading-6">
+                        Send messages to your therapist between sessions. Get support when you need it most.
+                    </p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="bg-white p-8 hover:shadow-xl transition-all duration-500 reveal-on-scroll group rounded-lg border-b-4 border-transparent hover:border-echo-teal text-center" style="transition-delay: 0.2s;">
+                    <div class="w-16 h-16 mx-auto bg-echo-sand rounded-full flex items-center justify-center text-echo-teal mb-6 text-2xl group-hover:bg-echo-teal group-hover:text-white transition-colors duration-300">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="text-xl font-serif text-echo-dark mb-4">Specialized Therapy</h3>
+                    <p class="text-echo-slate text-sm leading-6">
+                        Every person's journey is unique. We offer specialized therapy tailored to your specific needs, drawing on evidence-based approaches.
+                    </p>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="bg-white p-8 hover:shadow-xl transition-all duration-500 reveal-on-scroll group rounded-lg border-b-4 border-transparent hover:border-echo-teal text-center" style="transition-delay: 0.3s;">
+                    <div class="w-16 h-16 mx-auto bg-echo-sand rounded-full flex items-center justify-center text-echo-teal mb-6 text-2xl group-hover:bg-echo-teal group-hover:text-white transition-colors duration-300">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h3 class="text-xl font-serif text-echo-dark mb-4">Complete Privacy</h3>
+                    <p class="text-echo-slate text-sm leading-6">
+                        DPDP compliant platform with end-to-end encryption. Your privacy and safety are our priority.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Meet Our Therapist Sub-section -->
+            <div class="mt-20 text-center reveal-on-scroll">
+                <h3 class="text-3xl font-serif text-echo-dark mb-6">Meet Our Therapist</h3>
+                <p class="text-lg text-echo-slate max-w-2xl mx-auto leading-relaxed">
+                    Our team of experienced, licensed professionals is here to support you on your mental health journey.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Parallax Quote Section -->
+    <section class="py-40 parallax-bg relative flex items-center justify-center" 
+             style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2073&q=80');">
+        <div class="absolute inset-0 bg-echo-dark/60 backdrop-blur-[2px]"></div>
+        <div class="relative z-10 text-center px-6 max-w-4xl reveal-on-scroll">
+            <i class="fas fa-quote-left text-4xl text-white/40 mb-8 block"></i>
+            <h2 class="text-3xl md:text-5xl font-serif text-white leading-tight mb-8">
+                "The quiet mind is not empty;<br> it is full of the universe."
+            </h2>
+            <div class="w-20 h-1 bg-echo-teal mx-auto"></div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-24 bg-white">
+        <div class="max-w-3xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-12 reveal-on-scroll">
+                <h2 class="text-4xl font-serif text-echo-dark mb-4">Frequently Asked Questions</h2>
+                <p class="text-echo-slate">Understanding the process before you begin.</p>
+            </div>
+
+            <div class="space-y-4 reveal-on-scroll">
+                <!-- FAQ Item 1 -->
+                <div class="border border-echo-slate/20 rounded-lg overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left bg-echo-sand/30 hover:bg-echo-sand flex justify-between items-center transition-colors focus:outline-none" onclick="toggleAccordion(1)">
+                        <span class="font-serif text-lg text-echo-dark font-medium">How does online therapy work?</span>
+                        <i class="fas fa-plus text-echo-teal text-sm transform transition-transform duration-300" id="icon-1"></i>
+                    </button>
+                    <div id="content-1" class="accordion-content bg-white">
+                        <div class="px-6 py-4 text-echo-slate text-sm leading-relaxed">
+                            Online therapy works through secure video calls, phone calls, or messaging. You'll meet with your licensed therapist at scheduled times from the comfort of your home. Sessions are just as effective as in-person therapy and offer more flexibility.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="border border-echo-slate/20 rounded-lg overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left bg-echo-sand/30 hover:bg-echo-sand flex justify-between items-center transition-colors focus:outline-none" onclick="toggleAccordion(2)">
+                        <span class="font-serif text-lg text-echo-dark font-medium">How long is each therapy session?</span>
+                        <i class="fas fa-plus text-echo-teal text-sm transform transition-transform duration-300" id="icon-2"></i>
+                    </button>
+                    <div id="content-2" class="accordion-content bg-white">
+                        <div class="px-6 py-4 text-echo-slate text-sm leading-relaxed">
+                            Standard therapy sessions are 50 minutes long. However, we offer flexible scheduling options including 30-minute check-ins and 90-minute intensive sessions based on your needs.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="border border-echo-slate/20 rounded-lg overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left bg-echo-sand/30 hover:bg-echo-sand flex justify-between items-center transition-colors focus:outline-none" onclick="toggleAccordion(3)">
+                        <span class="font-serif text-lg text-echo-dark font-medium">Is my information confidential and secure?</span>
+                        <i class="fas fa-plus text-echo-teal text-sm transform transition-transform duration-300" id="icon-3"></i>
+                    </button>
+                    <div id="content-3" class="accordion-content bg-white">
+                        <div class="px-6 py-4 text-echo-slate text-sm leading-relaxed">
+                            Absolutely. We use DPDP-compliant, encrypted platforms for all communications. Your privacy is our top priority, and all therapists follow strict confidentiality guidelines as required by their professional licenses.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="border border-echo-slate/20 rounded-lg overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left bg-echo-sand/30 hover:bg-echo-sand flex justify-between items-center transition-colors focus:outline-none" onclick="toggleAccordion(4)">
+                        <span class="font-serif text-lg text-echo-dark font-medium">What if I need to cancel or reschedule?</span>
+                        <i class="fas fa-plus text-echo-teal text-sm transform transition-transform duration-300" id="icon-4"></i>
+                    </button>
+                    <div id="content-4" class="accordion-content bg-white">
+                        <div class="px-6 py-4 text-echo-slate text-sm leading-relaxed">
+                            We understand that life happens. You can cancel or reschedule appointments up to 24 hours in advance without any charges. Cancellations with less than 24 hours notice may incur a fee.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 5 -->
+                <div class="border border-echo-slate/20 rounded-lg overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left bg-echo-sand/30 hover:bg-echo-sand flex justify-between items-center transition-colors focus:outline-none" onclick="toggleAccordion(5)">
+                        <span class="font-serif text-lg text-echo-dark font-medium">How do I know if online therapy is right for me?</span>
+                        <i class="fas fa-plus text-echo-teal text-sm transform transition-transform duration-300" id="icon-5"></i>
+                    </button>
+                    <div id="content-5" class="accordion-content bg-white">
+                        <div class="px-6 py-4 text-echo-slate text-sm leading-relaxed">
+                            Online therapy is ideal if you value convenience, have a busy schedule, or prefer the comfort of your own space. It's effective for most mental health concerns including anxiety, depression, stress, and relationship issues. We offer a free consultation to help you decide.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 6 -->
+                <div class="border border-echo-slate/20 rounded-lg overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left bg-echo-sand/30 hover:bg-echo-sand flex justify-between items-center transition-colors focus:outline-none" onclick="toggleAccordion(6)">
+                        <span class="font-serif text-lg text-echo-dark font-medium">What should I expect in my first session?</span>
+                        <i class="fas fa-plus text-echo-teal text-sm transform transition-transform duration-300" id="icon-6"></i>
+                    </button>
+                    <div id="content-6" class="accordion-content bg-white">
+                        <div class="px-6 py-4 text-echo-slate text-sm leading-relaxed">
+                            Your first session is an opportunity to meet your therapist, discuss your concerns, and develop initial goals. Your therapist will ask questions to understand your situation better and explain how they can help. There's no pressure - it's a safe space for you to share at your own pace.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 7 -->
+                <div class="border border-echo-slate/20 rounded-lg overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left bg-echo-sand/30 hover:bg-echo-sand flex justify-between items-center transition-colors focus:outline-none" onclick="toggleAccordion(7)">
+                        <span class="font-serif text-lg text-echo-dark font-medium">Can I switch therapists if needed?</span>
+                        <i class="fas fa-plus text-echo-teal text-sm transform transition-transform duration-300" id="icon-7"></i>
+                    </button>
+                    <div id="content-7" class="accordion-content bg-white">
+                        <div class="px-6 py-4 text-echo-slate text-sm leading-relaxed">
+                            Yes, absolutely. Finding the right therapist fit is important for successful therapy. If you feel your current therapist isn't the right match, we'll help you connect with another professional who better suits your needs at no additional cost.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-echo-dark text-echo-light relative overflow-hidden">
+         <!-- Abstract Shapes -->
+         <div class="absolute -top-24 -right-24 w-96 h-96 bg-echo-teal rounded-full mix-blend-overlay filter blur-3xl opacity-20 animate-breathe"></div>
+         <div class="absolute -bottom-24 -left-24 w-80 h-80 bg-blue-500 rounded-full mix-blend-overlay filter blur-3xl opacity-20 animate-float"></div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <div class="reveal-on-scroll">
+                    <span class="text-echo-teal font-medium tracking-widest text-sm uppercase">Get Started Today</span>
+                    <h2 class="text-4xl font-serif text-white mb-6 mt-2">Start Your Conversation</h2>
+                    <p class="text-echo-light/80 text-lg mb-10 leading-relaxed">
+                        Fill out the form below and we'll match you with the right therapist.
+                    </p>
+                    
+                    <div class="space-y-8">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mt-1 text-xl">
+                                <i class="fas fa-envelope text-echo-teal"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-serif text-xl">Email Us</h4>
+                                <p class="text-white/60 mt-1">support@unveiledecho.com</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mt-1 text-xl">
+                                <i class="fas fa-phone-alt text-echo-teal"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-serif text-xl">Call Us</h4>
+                                <p class="text-white/60 mt-1">1-800-THERAPY</p>
+                                <p class="text-white/60">Available Nationwide</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white/5 backdrop-blur-md p-8 rounded-xl border border-white/10 reveal-on-scroll" style="transition-delay: 0.2s;">
+                    <form onsubmit="event.preventDefault(); alert('Thank you for your message. We will contact you shortly.');" class="space-y-6">
+                        <div>
+                            <label class="block text-sm text-white/60 mb-2">Full Name *</label>
+                            <input type="text" required class="w-full bg-white/10 border border-white/20 rounded-md px-4 py-3 text-white focus:outline-none focus:border-echo-teal transition-colors" placeholder="Your Full Name">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-white/60 mb-2">Email Address *</label>
+                            <input type="email" required class="w-full bg-white/10 border border-white/20 rounded-md px-4 py-3 text-white focus:outline-none focus:border-echo-teal transition-colors" placeholder="you@example.com">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-white/60 mb-2">Phone Number</label>
+                            <input type="tel" class="w-full bg-white/10 border border-white/20 rounded-md px-4 py-3 text-white focus:outline-none focus:border-echo-teal transition-colors" placeholder="(555) 123-4567">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-white/60 mb-2">Tell us about yourself *</label>
+                            <textarea rows="4" required class="w-full bg-white/10 border border-white/20 rounded-md px-4 py-3 text-white focus:outline-none focus:border-echo-teal transition-colors" placeholder="Share a little bit about what brings you here..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-echo-teal text-white font-medium py-3 rounded-md hover:bg-white hover:text-echo-dark transition-all duration-300 uppercase tracking-widest text-sm shadow-md hover:shadow-lg">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-echo-sand pt-16 pb-8 border-t border-echo-slate/10">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div class="col-span-1 md:col-span-1">
+                    <h3 class="text-2xl font-serif font-semibold text-echo-dark mb-4 flex items-center gap-2">
+                        <i class="fas fa-leaf text-echo-teal text-lg"></i> Unveiled Echo
+                    </h3>
+                    <p class="text-sm text-echo-slate leading-relaxed">
+                        Professional online therapy and counseling services. Your journey to better mental health starts here.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-echo-dark mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm text-echo-slate">
+                        <li><a href="#mission" class="hover:text-echo-teal transition-colors">About Us</a></li>
+                        <li><a href="#services" class="hover:text-echo-teal transition-colors">Services</a></li>
+                        <li><a href="#faq" class="hover:text-echo-teal transition-colors">FAQ</a></li>
+                        <li><a href="#" class="hover:text-echo-teal transition-colors">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-echo-dark mb-4">Contact</h4>
+                    <ul class="space-y-2 text-sm text-echo-slate">
+                        <li><a href="mailto:support@unveiledecho.com" class="hover:text-echo-teal transition-colors">support@unveiledecho.com</a></li>
+                        <li><a href="tel:1-800-THERAPY" class="hover:text-echo-teal transition-colors">1-800-THERAPY</a></li>
+                        <li><span class="text-echo-slate/70">Available Nationwide</span></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-echo-dark mb-4">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-echo-dark hover:bg-echo-teal hover:text-white transition-all shadow-sm"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-echo-dark hover:bg-echo-teal hover:text-white transition-all shadow-sm"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-echo-dark hover:bg-echo-teal hover:text-white transition-all shadow-sm"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-echo-slate/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-echo-slate">
+                <p>&copy; 2025 Unveiled Echo. All rights reserved.</p>
+                <div class="mt-4 md:mt-0 text-center md:text-right">
+                    <p class="font-medium text-red-500/80">If you're experiencing a mental health crisis, please call the National Suicide Prevention Lifeline at 112</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-echo-sand/95', 'backdrop-blur-md', 'shadow-sm', 'py-3');
+                navbar.classList.remove('py-6', 'bg-transparent');
+            } else {
+                navbar.classList.remove('bg-echo-sand/95', 'backdrop-blur-md', 'shadow-sm', 'py-3');
+                navbar.classList.add('py-6', 'bg-transparent');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        let isMenuOpen = false;
+
+        function toggleMenu() {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                menu.classList.remove('opacity-0', 'pointer-events-none');
+                btn.innerHTML = '<i class="fas fa-times"></i>';
+            } else {
+                menu.classList.add('opacity-0', 'pointer-events-none');
+                btn.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        }
+
+        btn.addEventListener('click', toggleMenu);
+
+        // Accordion Functionality
+        function toggleAccordion(id) {
+            const content = document.getElementById(`content-${id}`);
+            const icon = document.getElementById(`icon-${id}`);
+            
+            // Close all others
+            document.querySelectorAll('.accordion-content').forEach(el => {
+                if (el.id !== `content-${id}`) {
+                    el.style.maxHeight = null;
+                    el.classList.remove('active');
+                }
+            });
+            document.querySelectorAll('.fa-plus').forEach(el => {
+                if (el.id !== `icon-${id}`) {
+                    el.style.transform = 'rotate(0deg)';
+                }
+            });
+
+            // Toggle current
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+                content.classList.remove('active');
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+                content.classList.add('active');
+                icon.style.transform = 'rotate(45deg)';
+            }
+        }
+
+        // Intersection Observer for Fade-in Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

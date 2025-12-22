@@ -3,11 +3,8 @@
 
 import { useState } from 'react';
 import { sendEmail } from '@/app/actions';
-import { Loader2 } from 'lucide-react'; // Optional: for a spinning icon
-
 export default function ContactForm() {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
-
   async function handleSubmit(formData: FormData) {
     setStatus('submitting');
     
@@ -22,7 +19,7 @@ export default function ContactForm() {
   }
 
   return (
-    <section id="contact" className="py-20 bg-white">
+    <section id="contact" className="relative py-20 section-bg-peach">
       <div className="max-w-3xl mx-auto px-4">
         <div className="text-center mb-10">
           <h2 className="text-3xl font-bold text-slate-900 mb-4">Get Started Today</h2>
@@ -30,7 +27,7 @@ export default function ContactForm() {
         </div>
 
         {status === 'success' ? (
-          <div className="bg-green-50 text-green-800 p-8 rounded-2xl text-center border border-green-200">
+          <div className="card-neon bg-green-50 text-green-800 p-8 rounded-2xl text-center border border-green-200">
             <h3 className="text-xl font-bold mb-2">Message Sent Successfully!</h3>
             <p>Thank you for reaching out. We will review your details and get back to you at <strong>intakes@unveiledecho.com</strong> shortly.</p>
             <button 
@@ -41,7 +38,7 @@ export default function ContactForm() {
             </button>
           </div>
         ) : (
-          <form action={handleSubmit} className="space-y-6 bg-slate-50 p-8 rounded-2xl border border-slate-200 shadow-sm">
+          <form action={handleSubmit} className="space-y-6 card-neon p-8 rounded-2xl border border-slate-200">
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-1">Full Name *</label>
               <input name="name" type="text" required className="w-full p-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-teal-500 focus:outline-none" />

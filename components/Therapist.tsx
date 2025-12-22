@@ -1,10 +1,6 @@
-import { Video, MessageSquare, Lock, Sparkles } from 'lucide-react';
-
-
-
 export default function Therapist() {
   return (
-    <section id="services" className="py-20 bg-slate-50">
+    <section id="services" className="relative py-20 section-bg-lilac">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-bold text-center text-slate-900 mb-4">Meet Our Therapist</h2>
         <div className="grid md:grid-cols-1 gap-6">

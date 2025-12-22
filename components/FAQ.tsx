@@ -1,4 +1,3 @@
-// Simple Tailwind Version (No external dependencies)
 export default function FAQ() {
   const faqs = [
     {
@@ -32,15 +31,17 @@ export default function FAQ() {
   ];
 
   return (
-    <section id="faq" className="py-20 bg-slate-50">
+    <section id="faq" className="relative py-20 section-bg-mint">
       <div className="max-w-3xl mx-auto px-4">
         <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">Frequently Asked Questions</h2>
         <div className="space-y-4">
           {faqs.map((faq, index) => (
-            <details key={index} className="group bg-white rounded-lg p-6 border border-slate-200 cursor-pointer">
+            <details key={index} className="card-calm rounded-lg p-6 border border-slate-200 cursor-pointer">
               <summary className="font-semibold text-slate-800 list-none flex justify-between items-center">
                 {faq.question}
-                <span className="group-open:rotate-180 transition-transform">▼</span>
+                <svg className="caret-svg" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M6 8l4 4 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
               </summary>
               <p className="mt-4 text-slate-600">{faq.answer}</p>
             </details>
