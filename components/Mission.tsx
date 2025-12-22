@@ -1,3 +1,6 @@
+'use client';
+
+import { useRef, useEffect } from 'react';
 import { ShieldCheck, Heart, UserCheck, Globe } from 'lucide-react';
 
 const features = [
@@ -24,24 +27,43 @@ const features = [
 ];
 
 export default function Mission() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fade-in-scroll');
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -100px 0px' }
+    );
+
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => {
+      if (sectionRef.current) observer.unobserve(sectionRef.current);
+    };
+  }, []);
+
   return (
-    <section id="mission" className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold text-slate-900 mb-4">Our Mission</h2>
-          <p className="text-slate-600 max-w-3xl mx-auto">
+    <section ref={sectionRef} id="mission" className="py-32 md:py-40 bg-gradient-to-r from-teal-200 via-emerald-100 to-cyan-100">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-20">
+          <h2 className="text-4xl md:text-5xl font-bold text-teal-900 mb-6">Our Mission</h2>
+          <p className="text-lg md:text-xl text-teal-800 max-w-3xl mx-auto leading-relaxed">
             We believe everyone deserves access to quality mental health care. Our mission is to make professional therapy accessible, affordable, and stigma-free.
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((item, index) => (
-            <div key={index} className="p-6 bg-slate-50 rounded-2xl hover:shadow-lg transition-shadow border border-slate-100">
-              <div className="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center mb-4">
+            <div key={index} className="p-6 bg-white/90 rounded-2xl border border-teal-100 backdrop-blur-sm cursor-pointer group transition-all duration-300 hover:shadow-2xl hover:scale-105 hover:border-teal-200 hover:bg-white">
+              <div className="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-teal-200 transition-colors duration-300">
                 {item.icon}
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-slate-800">{item.title}</h3>
-              <p className="text-slate-600 text-sm leading-relaxed">{item.desc}</p>
+              <h3 className="text-xl font-semibold mb-2 text-teal-900 group-hover:text-teal-700 transition-colors">{item.title}</h3>
+              <p className="text-teal-700 text-sm leading-relaxed group-hover:text-teal-600 transition-colors">{item.desc}</p>
             </div>
           ))}
         </div>

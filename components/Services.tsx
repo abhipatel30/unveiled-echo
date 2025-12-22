@@ -1,4 +1,9 @@
+'use client';
+
+import { memo } from 'react';
+import { useParallax } from '@/hooks/useParallax';
 import { Video, MessageSquare, Lock, Sparkles } from 'lucide-react';
+
 const services = [
   {
     title: "Video Sessions",
@@ -22,28 +27,30 @@ const services = [
   }
 ];
 
-export default function Services() {
+function Services() {
+  const parallaxRef = useParallax(0.4);
+  
   return (
-    <section id="services" className="relative py-20 section-bg-lavender section-contrast">
-       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+    <section id="services" className="relative py-24 md:py-32 overflow-hidden">
+       <div ref={parallaxRef} className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <img
           src="/bg1_1.jpg"
           alt="Calm Nature"
-          className="w-full h-full object-cover opacity-90"
-          style={{opacity:'0.5', transform: 'scale(1.1)', filter: 'blur(5px)' }}
+          className="w-full h-full object-cover"
+          style={{opacity:'0.4', transform: 'scale(1.15)', filter: 'blur(3px)' }}
         />
         </div>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">How We Help</h2>
-        <div className="grid md:grid-cols-2 gap-6">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <h2 className="text-4xl md:text-5xl font-bold text-center text-slate-900 mb-16">How We Help</h2>
+        <div className="grid md:grid-cols-2 gap-8">
           {services.map((service, index) => (
-            <div key={index} className="flex items-start card-calm border border-slate-100">
-              <div className="flex-shrink-0 calm-icon mr-4">
+            <div key={index} className="flex items-start card-calm border border-slate-100 cursor-pointer group transition-all duration-300 hover:shadow-2xl hover:scale-105 hover:border-teal-200 relative z-10">
+              <div className="flex-shrink-0 calm-icon mr-4 group-hover:scale-110 transition-transform duration-300">
                 {service.icon}
               </div>
               <div>
-                <h3 className="text-xl font-bold text-slate-800 mb-2">{service.title}</h3>
-                <p className="text-slate-600">{service.desc}</p>
+                <h3 className="text-xl font-bold text-slate-800 mb-2 group-hover:text-teal-700 transition-colors duration-300">{service.title}</h3>
+                <p className="text-slate-600 group-hover:text-slate-700 transition-colors duration-300">{service.desc}</p>
               </div>
             </div>
           ))}
@@ -52,3 +59,5 @@ export default function Services() {
     </section>
   );
 }
+
+export default memo(Services);

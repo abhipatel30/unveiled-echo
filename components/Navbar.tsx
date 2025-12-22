@@ -1,37 +1,42 @@
 'use client';
-import { useState } from 'react';
+import { useState, useCallback, useMemo, memo } from 'react';
 import { Menu, X, Home, Target, Briefcase, HelpCircle, Mail } from 'lucide-react';
 
-export default function Navbar() {
+interface NavLink {
+  name: string;
+  href: string;
+  icon: React.ReactNode;
+}
+
+function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const navLinks = [
+  const navLinks: NavLink[] = useMemo(() => [
     { name: 'Home', href: '#home', icon: <Home className="nav-link-icon" /> },
     { name: 'Mission', href: '#mission', icon: <Target className="nav-link-icon" /> },
     { name: 'Services', href: '#services', icon: <Briefcase className="nav-link-icon" /> },
     { name: 'FAQ', href: '#faq', icon: <HelpCircle className="nav-link-icon" /> },
     { name: 'Contact', href: '#contact', icon: <Mail className="nav-link-icon" /> },
-  ];
+  ], []);
 
-  function handleNavClick(e: any, href: string) {
+  const handleNavClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     // Smooth scroll to section with offset for fixed nav
     if (href && href.startsWith('#')) {
       e.preventDefault();
       const id = href.slice(1);
-      const el = document.getElementById(id) || document.querySelector(href);
+      const el = document.getElementById(id);
+      
       if (el) {
-        // compute rect BEFORE changing layout (close menu)
-        const rect = (el as HTMLElement).getBoundingClientRect();
-        const nav = document.querySelector('nav');
-        const navHeight = nav ? Math.ceil(nav.getBoundingClientRect().height) : 0;
-        const targetY = window.scrollY + rect.top - navHeight - 12; // small gap
-        // close mobile menu if open
+        // Close mobile menu first
         setIsOpen(false);
-        // perform smooth scroll
-        window.scrollTo({ top: targetY, behavior: 'smooth' });
+        
+        // Use requestAnimationFrame for smoother scrolling
+        requestAnimationFrame(() => {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
       }
     }
-  }
+  }, []);
 
   return (
     <nav className="fixed top-0 w-full bg-white/90 backdrop-blur-md z-50 border-b border-slate-200">
@@ -93,3 +98,5 @@ export default function Navbar() {
     </nav>
   );
 }
+
+export default memo(Navbar);
